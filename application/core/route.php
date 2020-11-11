@@ -51,7 +51,7 @@ class Route
             $controller->$action();
         }
         
-
+       
     }
 
     static function ErrorPage404()
