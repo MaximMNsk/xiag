@@ -12,7 +12,7 @@ class ControllerMain extends Controller
     }
 
     function actionIndex(){
-        $this->view->generate('ViewMain.php', 'ViewTemplate.php'); 
+        return $this->view->generate('ViewMain.php', 'ViewTemplate.php'); 
     }
 
 }

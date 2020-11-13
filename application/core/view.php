@@ -7,7 +7,7 @@ class View
 
     function generate($viewContent, $viewTemplate, $data = null)
     {
-        include 'application/views/'.$viewContent;
+        include 'application/views/'.$viewTemplate;
     }
 
 }
