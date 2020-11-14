@@ -1,4 +1,4 @@
 <?php
             
-include 'application/views/'.$content_view;
+include 'application/views/'.$viewContent;
 

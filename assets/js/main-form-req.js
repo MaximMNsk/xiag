@@ -3,11 +3,11 @@ $(document).on('click', '#save', ()=>{
     $.ajax({
         dataType: "json",
         type: "POST",
-        url: 'save/',
+        url: 'main/save/',
         data: $.param( collectData() ),
         success: function( ans ){
             d.resolve();
-            
+            console.info(ans);
         },
         error: function (jqXHR, exception) {
             ajaxError(jqXHR, exception);
