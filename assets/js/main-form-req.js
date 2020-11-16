@@ -1,25 +1,50 @@
-
-
-$(document).ready(()=>{
-
+$(document).on('click', '#save', ()=>{
+    var d = $.Deferred();
+    $.ajax({
+        dataType: "json",
+        type: "POST",
+        url: 'main/save/',
+        data: $.param( collectData() ),
+        success: function( ans ){
+            d.resolve();
+            console.info(ans);
+        },
+        error: function (jqXHR, exception) {
+            ajaxError(jqXHR, exception);
+            d.reject();
+        }
+    });
+    return d; 
 });
 
 
+function collectData(){
+    let data = [];
+    data.push(
+        {name: 'question', value: $('#question').val() }
+    );
+    $('input[id^=answer]').each(function(i,e){
+        data.push(
+            {name: $(e).attr('id'), value: $(e).val() }
+        );
+    });
+    return data;
+}
 
 $(document).ajaxStart(function () {
-    Waiting( 'start' );
+    waiting( 'start' );
 });
 
 $(document).ajaxStop(function () {
-    Waiting( 'stop' );
+    waiting( 'stop' );
 });
 
 
-function Waiting( way ) {
+function waiting( way ) {
     if( way=='start' ){
         $("body").prepend("<div id=\"waiting\"><img src='../assets/img/loading-page.gif' id=\"waiting-img\" /></div>");
-        $("#waiting").addClass('position-absolute w-100 h-100');
-        $("#waiting-img").css( {"top":"20%", "left":"37%"} ).addClass('position-fixed w-25');
+        $("#waiting").addClass('position-absolute w-100 h-100').css({"z-index":"500"});
+        $("#waiting-img").css( {"top":"10%", "left":"37%"} ).addClass('position-fixed w-25');
         // $("body").attr("disabled", true);
     }else if( way=='stop' ){
         $("body").attr("disabled", false);
@@ -30,7 +55,7 @@ function Waiting( way ) {
 }
 
 
-function AjaxError(jqXHR, exception){
+function ajaxError(jqXHR, exception){
     var msg = '';
     if (jqXHR.status === 0) {
         msg = 'Can not connect.\n Verify Network.';

@@ -2,37 +2,30 @@
 
 namespace application\models;
 
+use PDO;
+
 class Model
 {
 
-    public $db;
+    protected $db;
 
-    function __construct($serverName, $dbName, $username, $password){
-        $options = array( "Database"=>$dbName, "UID"=>$username, "PWD"=>$password);
-        $conn = sqlsrv_connect( $serverName, $options);
+    function __construct($connectType='mysql', $serverName, $dbName, $username, $password){
+        $conn = new PDO($connectType.':host='.$serverName.';dbname='.$dbName, $username, $password);
         $this->db = (!$conn) ? false : $conn ;
     }
 
-
-    function prepareRequests(){
-        if( !$this->db ){
-            return false;
+    function makeRequest($reqSql, $options=[ 'sql'=>'select 1', 'params'=>[] ] ){ // params = ['sql'=>'', 'values'=>['bindName1'=>'bindValue1', ... , 'bindName2'=>'bindValue2']]
+        $q = explode( ' ', strtolower(trim($options['sql'])) );
+        $statement = $this->db->prepare( $options['sql'] );
+        if(count( $options['params'] )>0){
+            foreach($options['params'] as $k=>$v){
+                $statement->bindParam( $k, $v );
+            }
         }
-        if ( sqlsrv_begin_transaction( $this->db ) === false ) {
-            return false;
-        }
-        return true;
-    }
-
-    function makeRequest($reqSql, $options=[ 'q' => 'select', 'params' => [] ]){
-        $statement = @sqlsrv_query( $this->db, $reqSql, $options['params'] );
-        if($options['q'] == 'select'){
-            $res = [];
+        $statement->execute();
+        if($options['q'][0] == 'select'){
             if($statement){
-                while( $row = sqlsrv_fetch_array( $statement, SQLSRV_FETCH_ASSOC) ) {
-                    $res[] = $row;
-                }
-                sqlsrv_free_stmt($statement);
+                $res = $statement->fetchAll();
                 return $res;
             }else{
                 return false;
@@ -46,13 +39,6 @@ class Model
         }
     }
 
-    function commitRequest(){
-        sqlsrv_commit($this->db);
-    }
-
-    function rollbackRequest(){
-        sqlsrv_rollback($this->db);
-    }
 
 
 }
