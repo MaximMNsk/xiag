@@ -14,7 +14,7 @@ class Model
         $this->db = (!$conn) ? false : $conn ;
     }
 
-    function makeRequest($reqSql, $options=[ 'sql'=>'select 1', 'params'=>[] ] ){ // params = ['sql'=>'', 'values'=>['bindName1'=>'bindValue1', ... , 'bindName2'=>'bindValue2']]
+    function makeRequest($options=[ 'sql'=>'select 1', 'params'=>[] ] ){ // params = ['sql'=>'', 'values'=>['bindName1'=>'bindValue1', ... , 'bindName2'=>'bindValue2']]
         $q = explode( ' ', strtolower(trim($options['sql'])) );
         $statement = $this->db->prepare( $options['sql'] );
         if(count( $options['params'] )>0){
@@ -23,15 +23,15 @@ class Model
             }
         }
         $statement->execute();
-        if($options['q'][0] == 'select'){
-            if($statement){
+        if($q[0] == 'select'){
+            if($statement->errorCode()=='00000'){
                 $res = $statement->fetchAll();
                 return $res;
             }else{
                 return false;
             }
         }else{
-            if ($statement) {
+            if ($statement->errorCode()=='00000') {
                 return true;
             } else {
                 return false;
