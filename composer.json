@@ -1,5 +1,5 @@
 {
-    "name": "xiag/phptest",
+    "name": "medyantsev/xiagtest",
     "description": "test project",
     "require": {
         "workerman/workerman": "^4.0"
