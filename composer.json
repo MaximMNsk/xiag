@@ -1,5 +1,5 @@
 {
-    "name": "MaximMNsk/xiag",
+    "name": "maximmnsk/xiag",
     "type": "project",
     "description": "test project",
     "require": {
@@ -9,5 +9,5 @@
         "phpunit/phpunit": "8"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": false
 }
