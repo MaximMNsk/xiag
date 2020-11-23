@@ -1,6 +1,6 @@
 <?php
-include 'config.php';
-include PATH["ROOT"].'application'.PATH["SEPARATOR"].'migrations'.PATH["SEPARATOR"].'Migrations.php';
+
+require 'application\migrations\Migrations.php';
 
 use PHPUnit\Framework\TestCase;
 use application\migrations\Migrations;

@@ -1,8 +1,8 @@
 <?php
 
 namespace application\migrations;
-include $config = (file_exists('config.php')) ? 'config.php' : '../../config.php';
-include PATH["ROOT"].'application\\core\\model.php';
+require $config = (file_exists('config.php')) ? 'config.php' : '../../config.php';
+require 'application/core/model.php';
 use application\models\Model;
 
 class Migrations extends Model
@@ -18,9 +18,9 @@ class Migrations extends Model
     }
 
     function compareSql(){
-        $executedFilesStr = file_get_contents('./.lst');
+        $executedFilesStr = file_get_contents(PATH["MIGRATIONS"].'.lst');
         $executedFiles = ( $executedFilesStr ) ? array_diff(explode('|', $executedFilesStr), ['']) : [];
-        $migrationFiles = array_diff(scandir('./sql'), array('..', '.'));
+        $migrationFiles = array_diff(scandir(PATH["MIGRATIONS"].'sql'), array('..', '.'));
         return $diff = array_diff($migrationFiles, $executedFiles);
     }
 
@@ -28,7 +28,7 @@ class Migrations extends Model
         if( !$files ) return false;
         $res = [];
         foreach($files as $file){
-            $sql = file_get_contents( './sql/'.$file );
+            $sql = file_get_contents( PATH["MIGRATIONS"].'sql'.PATH["SEPARATOR"].$file );
             if( $this->makeRequest( ['sql'=>$sql, 'params'=>[]] ) ){
                 $this->saveName( $file );
                 $res[$file] = 'Success';
@@ -40,6 +40,6 @@ class Migrations extends Model
     }
 
     function saveName( $fileName ){
-        file_put_contents('./.lst', $fileName.'|');
+        file_put_contents(PATH["MIGRATIONS"].'.lst', $fileName.'|');
     }
 }

@@ -2,11 +2,11 @@
 define("DB",[
     "SERVER" => "localhost",
     "DBNAME" => "xiag",
-    "USERNAME" => "test",
-    "PWD" => "test",
+    "USERNAME" => "xiag",
+    "PWD" => "xiag",
 ]);
 
 define("PATH", [
-    "ROOT" => "C:\\wamp64\\www\\xiag\\",
-    "SEPARATOR" => "\\"
+    "MIGRATIONS" => "application/migrations/",
+    
 ]);

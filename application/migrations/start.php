@@ -1,6 +1,7 @@
 <?php
 
-include './migrations.php';
+include 'migrations.php';
+use application\migrations\Migrations;
 
 $migrate = new Migrations;
 
