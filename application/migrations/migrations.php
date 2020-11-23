@@ -1,7 +1,8 @@
 <?php
 
-include '../core/model.php';
-include '../../config.php';
+namespace application\migrations;
+include $config = (file_exists('config.php')) ? 'config.php' : '../../config.php';
+include PATH["ROOT"].'application\\core\\model.php';
 use application\models\Model;
 
 class Migrations extends Model
