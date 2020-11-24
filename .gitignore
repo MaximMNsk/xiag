@@ -1,2 +1,6 @@
-vendor
-*.cache
+# vendor
+/vendor
+
+
+# phpunit
+/.phpunit.result.cache
