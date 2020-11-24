@@ -2,6 +2,14 @@
 
 require 'application\migrations\Migrations.php';
 
+
+// function currentAutoload($classname){
+//     $filename = $classname.'.php';
+//     @require $filename;
+// }
+
+// spl_autoload_register('currentAutoload');
+
 use PHPUnit\Framework\TestCase;
 use application\migrations\Migrations;
 
