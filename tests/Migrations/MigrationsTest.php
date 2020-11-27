@@ -16,13 +16,7 @@ class MigrationsTest extends TestCase
         $this->mgr = new Migrations;
         parent::__construct($name, $data, $dataName);
     }
-
-    public function testMigrations()
-    {
-        $stack = [];
-        $this->assertSame(0, count($stack));
-    }
-
+    
     /**
      * @dataProvider  filesProvider
      * 
