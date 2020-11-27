@@ -40,6 +40,6 @@ class Migrations extends Model
     }
 
     function saveName( $fileName ){
-        return file_put_contents(PATH["MIGRATIONS"].'.lst', $fileName.'|');
+        return file_put_contents(PATH["MIGRATIONS"].'.lst', $fileName.'|', FILE_APPEND);
     }
 }
