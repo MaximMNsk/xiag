@@ -7,6 +7,6 @@ define("DB",[
 ]);
 
 define("PATH", [
-    "MIGRATIONS" => "application/migrations/",
-    
+    "MIGRATIONS" => __DIR__."/application/migrations/",
+    "ROOT" => __DIR__,
 ]);

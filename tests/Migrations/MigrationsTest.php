@@ -1,14 +1,6 @@
 <?php
 
-require 'application\migrations\Migrations.php';
-
-
-// function currentAutoload($classname){
-//     $filename = $classname.'.php';
-//     @require $filename;
-// }
-
-// spl_autoload_register('currentAutoload');
+require 'application/migrations/Migrations.php';
 
 use PHPUnit\Framework\TestCase;
 use application\migrations\Migrations;
@@ -19,21 +11,31 @@ class MigrationsTest extends TestCase
 
     protected $mgr;
 
-    function __construct()
+    function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::__construct();
         $this->mgr = new Migrations;
+        parent::__construct($name, $data, $dataName);
     }
-    public function testMigrations(){
+
+    public function testMigrations()
+    {
         $stack = [];
         $this->assertSame(0, count($stack));
     }
 
     /**
-     * @dataProvider 
+     * @dataProvider  filesProvider
+     * 
      */
+    public function testCompareAbsentFiles($expected) 
+    {
+        $this->assertEquals($expected, $this->mgr->compareSql());
+    }
 
-    public function testCompareSql(){
-
+    public function filesProvider()
+    {
+        return [
+            [[]]
+        ];
     }
 }
