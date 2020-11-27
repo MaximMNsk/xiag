@@ -23,7 +23,7 @@ class Route
         $actionName = 'action'.ucfirst($actionName);
 
 
-        $modelFile = strtolower($modelName).'.php';
+        $modelFile = $modelName.'.php';
         $modelPath = "application/models/".$modelFile;
 
         if(file_exists($modelPath))
