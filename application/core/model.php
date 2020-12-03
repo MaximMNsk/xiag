@@ -31,7 +31,6 @@ class Model
                 return false;
             }
         }elseif($q[0] == 'insert'){
-            print_r( $statement->errorInfo() );
             if($statement->errorCode()=='00000'){
                 $res = $this->db->lastInsertId();
                 return $res;
