@@ -62,8 +62,8 @@ function customAlert( alertCode, alertText ){
 }
 
 function customRedirect( uuid ){
-    var url = "show";
-    url = url+"/?"+uuid;
+    var url = "show/poll";
+    url = url+"/"+uuid;
     location.href = url;
 }
 

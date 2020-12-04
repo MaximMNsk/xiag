@@ -23,7 +23,7 @@ class ControllerMain extends Controller
     }
 
     function actionShow(){
-        
+        return $this->view->generate('ViewShow.php', 'ViewTemplate.php');
     }
 
 }
