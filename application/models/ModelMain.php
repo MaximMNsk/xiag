@@ -21,14 +21,23 @@ class ModelMain
     }
 
     function savePoll( $data=[] ){
-        // var_dump($this->modelValidate->emptyVals($data));
         if( !$this->modelValidate->emptyVals($data) ) return false;
+
         $question = $data['question'];
         $answers = array_diff_key($data, ['question' => '']);
+
         $this->modelPoll->question = $question;
         $this->modelPoll->save();
         $link = ($this->modelPoll->uuid) ? $this->modelPoll->uuid : false;
-        return $link;
+
+        if(!$link) return false;
+
+        $this->modelAnswers->answers = $answers;
+        $this->modelAnswers->parentId = $this->modelPoll->id;
+        $answerId = $this->modelAnswers->save();
+        
+        $res = ($answerId) ? $link : false;
+        return $res;
     }
     
 

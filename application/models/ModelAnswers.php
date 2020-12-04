@@ -7,6 +7,7 @@ class ModelAnswers extends Model
 {
     
     public $answers;
+    public $parentId;
 
     function __construct()
     {
@@ -14,8 +15,16 @@ class ModelAnswers extends Model
     }
 
     function save(){
-        
-        $res = $this->makeRequest(['sql' => 'select * from poll', 'params'=>[]]);
+        if( !is_array($this->answers) ) return false;
+        $sql = 'insert into answers (parent_id, answer) values ';
+        foreach($this->answers as $k => $answer){
+            $k = str_replace('-', '_', $k);
+            $sql .= '(:parent_'.$k.'_id, :'.$k.'), ';
+            $params[':parent_'.$k.'_id'] = $this->parentId;
+            $params[':'.$k] = $answer;
+        }
+        $sql = rtrim($sql, ', ');
+        $res = $this->makeRequest(['sql' => $sql, 'params'=>$params]);
         return $res;
     }
 }

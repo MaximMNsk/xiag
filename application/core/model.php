@@ -18,14 +18,14 @@ class Model
         $q = explode( ' ', strtolower(trim($options['sql'])) );
         $statement = $this->db->prepare( $options['sql'] );
         if(count( $options['params'] )>0){
-            foreach($options['params'] as $k=>$v){
+            foreach($options['params'] as $k=>&$v){
                 $statement->bindParam( $k, $v );
             }
         }
         $statement->execute();
         if($q[0] == 'select'){
             if($statement->errorCode()=='00000'){
-                $res = $statement->fetchAll();
+                $res = $statement->fetchAll(PDO::FETCH_ASSOC);
                 return $res;
             }else{
                 return false;
