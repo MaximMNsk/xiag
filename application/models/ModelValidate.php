@@ -11,8 +11,8 @@ class ModelValidate
         } else {
             return false;
         }
+        $flag = true;
         array_walk_recursive( $arr, function($val, $key) use (&$flag) {
-            $flag = true;
             if( empty($val) ) $flag = false; 
         }, $flag);
         return $flag;

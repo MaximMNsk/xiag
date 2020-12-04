@@ -3,7 +3,7 @@
 namespace application\models;
 
 require 'ModelPoll.php';
-require 'ModelQuestions.php';
+require 'ModelAnswers.php';
 require 'ModelValidate.php';
 
 use application\models\ModelPoll;
