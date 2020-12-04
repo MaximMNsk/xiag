@@ -7,6 +7,7 @@ $(document).on('click', '#save', ()=>{
         data: $.param( collectData() ),
         success: function( ans ){
             d.resolve();
+            customAlert( ans.code, ans.text );
             console.info(ans);
         },
         error: function (jqXHR, exception) {
@@ -39,6 +40,17 @@ $(document).ajaxStop(function () {
     waiting( 'stop' );
 });
 
+function customAlert( alertCode, alertText ){
+    var alertClass = (alertCode==0) ? "alert alert-success" : "alert alert-warning";
+    $("#message").append("<div id='custom-alert'>"+alertText+"</div>");
+    $("#custom-alert").addClass(alertClass).hide();
+    $("#custom-alert").fadeIn();
+    setTimeout(()=>{
+        $.when( $("#custom-alert").fadeOut() ).done(()=>{
+            $("#custom-alert").remove();
+        });
+    }, 5000);
+}
 
 function waiting( way ) {
     if( way=='start' ){

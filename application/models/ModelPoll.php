@@ -21,6 +21,7 @@ class ModelPoll extends Model
     }
 
     function getUuid( $id ){
-        return $this->makeRequest(['sql' => 'select uuid from poll where id = :id', 'params'=>[':id' => $id]]);
+        $data = $this->makeRequest(['sql' => 'select uuid from poll where id = :id', 'params'=>[':id' => $id]]);
+        return $data[0]['uuid'];
     }
 }

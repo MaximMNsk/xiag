@@ -22,6 +22,7 @@
             <span class="col-5" id="add-item"><button class="btn btn-success">+</button></span>
             <span></span>
             <hr>
+            <span id="message" class="w-5"></span>
             <button class="btn btn-success" id="save">START</button>
         </div>
     </div>
