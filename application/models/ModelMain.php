@@ -21,6 +21,7 @@ class ModelMain
     }
 
     function savePoll( $data=[] ){
+        // var_dump($this->modelValidate->emptyVals($data));
         if( !$this->modelValidate->emptyVals($data) ) return false;
         $question = $data['question'];
         $answers = array_diff_key($data, ['question' => '']);

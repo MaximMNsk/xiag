@@ -11,10 +11,11 @@ class ModelValidate
         } else {
             return false;
         }
-        foreach ($arr as $val){
-            if( empty($val) ) return false;
-        } 
-        return true;
+        array_walk_recursive( $arr, function($val, $key) use (&$flag) {
+            $flag = true;
+            if( empty($val) ) $flag = false; 
+        }, $flag);
+        return $flag;
     }
 
 }
