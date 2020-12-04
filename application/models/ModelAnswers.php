@@ -3,7 +3,7 @@
 namespace application\models;
 use application\models\Model;
 
-class ModelQuestions extends Model
+class ModelAnswers extends Model
 {
     
     public $answers;
@@ -13,7 +13,8 @@ class ModelQuestions extends Model
         parent::__construct('mysql', DB['SERVER'], DB['DBNAME'], DB['USERNAME'], DB['PWD']);
     }
 
-    function saveSome(){
+    function save(){
+        
         $res = $this->makeRequest(['sql' => 'select * from poll', 'params'=>[]]);
         return $res;
     }

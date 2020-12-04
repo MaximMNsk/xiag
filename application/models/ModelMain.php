@@ -7,7 +7,7 @@ require 'ModelQuestions.php';
 require 'ModelValidate.php';
 
 use application\models\ModelPoll;
-use application\models\ModelQuestions;
+use application\models\ModelAnswers;
 use application\models\ModelValidate;
 
 class ModelMain 
@@ -16,7 +16,7 @@ class ModelMain
     function __construct()
     {
         $this->modelPoll = new ModelPoll;
-        $this->modelQuestions = new ModelQuestions;
+        $this->modelAnswers = new ModelAnswers;
         $this->modelValidate = new ModelValidate;
     }
 
@@ -25,8 +25,8 @@ class ModelMain
         $question = $data['question'];
         $answers = array_diff_key($data, ['question' => '']);
         $this->modelPoll->question = $question;
-        $pollId = $this->modelPoll->save();
-        $link = ($pollId) ? $this->modelPoll->getLink($pollId) : false;
+        $this->modelPoll->save();
+        $link = ($this->modelPoll->uuid) ? $this->modelPoll->uuid : false;
         return $link;
     }
     

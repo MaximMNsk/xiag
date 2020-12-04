@@ -7,6 +7,8 @@ class ModelPoll extends Model
 {
 
     public $question; 
+    public $id;
+    public $uuid;
 
     function __construct()
     {
@@ -14,10 +16,11 @@ class ModelPoll extends Model
     }
 
     function save(){
-        return $this->makeRequest(['sql' => 'insert into poll (poll_question) values (:question)', 'params'=>[':question' => $this->question]]);
+        $this->id = $this->makeRequest(['sql' => 'insert into poll (poll_question) values (:question)', 'params'=>[':question' => $this->question]]);
+        $this->uuid = $this->getUuid( $this->id );
     }
 
-    function getLink( $id ){
+    function getUuid( $id ){
         return $this->makeRequest(['sql' => 'select uuid from poll where id = :id', 'params'=>[':id' => $id]]);
     }
 }
