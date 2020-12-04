@@ -6,8 +6,14 @@ $(document).on('click', '#save', ()=>{
         url: 'main/save/',
         data: $.param( collectData() ),
         success: function( ans ){
-            d.resolve();
-            customAlert( ans.code, ans.text );
+            $.when( customAlert( ans.code, ans.text ) ).done(()=>{
+                if( ans.code==0 ){
+                    d.resolve();
+                    customRedirect( ans.addData );
+                }else{
+                    d.resolve();
+                }
+            });
             console.info(ans);
         },
         error: function (jqXHR, exception) {
@@ -41,6 +47,7 @@ $(document).ajaxStop(function () {
 });
 
 function customAlert( alertCode, alertText ){
+    var d = $.Deferred();
     var alertClass = (alertCode==0) ? "alert alert-success" : "alert alert-warning";
     $("#message").append("<div id='custom-alert'>"+alertText+"</div>");
     $("#custom-alert").addClass(alertClass).hide();
@@ -48,8 +55,16 @@ function customAlert( alertCode, alertText ){
     setTimeout(()=>{
         $.when( $("#custom-alert").fadeOut() ).done(()=>{
             $("#custom-alert").remove();
+            d.resolve();
         });
-    }, 5000);
+    }, 1000);
+    return d; 
+}
+
+function customRedirect( uuid ){
+    var url = "show";
+    url = url+"/?"+uuid;
+    location.href = url;
 }
 
 function waiting( way ) {
