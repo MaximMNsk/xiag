@@ -14,7 +14,7 @@ $(document).on('click', '#save', ()=>{
                     d.resolve();
                 }
             });
-            console.info(ans);
+            // console.info(ans);
         },
         error: function (jqXHR, exception) {
             ajaxError(jqXHR, exception);
@@ -57,7 +57,7 @@ function customAlert( alertCode, alertText ){
             $("#custom-alert").remove();
             d.resolve();
         });
-    }, 1000);
+    }, 5000);
     return d; 
 }
 
