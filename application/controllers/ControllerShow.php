@@ -15,9 +15,15 @@ class ControllerShow extends Controller
         $this->model = new ModelShow;
     }
 
+    function actionIndex(){
+        Route::ErrorPage404();
+    }
+
     function actionPoll(){
         $currentUuid = $this->model->getPollUUID();
-        if( $data = $this->model->pollExists($currentUuid) ){
+        if( $id = $this->model->pollExists($currentUuid) ){
+            $data['poll'] = $this->model->getPollData( $id );
+            $data['answers'] = $this->model->getAnswersData( $id );
             return $this->view->generate('ViewShow.php', 'ViewTemplate.php', $data); 
         } else {
             Route::ErrorPage404();

@@ -27,4 +27,10 @@ class ModelAnswers extends Model
         $res = $this->makeRequest(['sql' => $sql, 'params'=>$params]);
         return $res;
     }
+
+    function getData(){
+        $sql = 'select * from answers where parent_id = :id';
+        $params = [':id' => $this->parentId];
+        return $this->makeRequest(['sql' => $sql, 'params' => $params]);
+    }
 }

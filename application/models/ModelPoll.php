@@ -20,6 +20,13 @@ class ModelPoll extends Model
         $this->uuid = $this->getUuid( $this->id );
     }
 
+    function getData(){
+        $sql = 'select * from poll where id = :id';
+        $params = [':id' => $this->id];
+        $res = $this->makeRequest(['sql' => $sql, 'params' => $params]);
+        return ($res) ? $res[0] : $res;
+    }
+
     function getUuid( $id ){
         $data = $this->makeRequest(['sql' => 'select uuid from poll where id = :id', 'params'=>[':id' => $id]]);
         return isset($data[0]['uuid']) ? $data[0]['uuid'] : false;
