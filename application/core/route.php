@@ -39,7 +39,10 @@ class Route
         {
             include $controllerPath;
         }
-        
+        else
+        {
+            self::ErrorPage404();
+        }
 
         $fullControllerName = 'application\\controllers\\'.$controllerName;
 
@@ -50,7 +53,10 @@ class Route
         {
             $controller->$action();
         }
-        
+        else
+        {
+            self::ErrorPage404();
+        }
        
     }
 
