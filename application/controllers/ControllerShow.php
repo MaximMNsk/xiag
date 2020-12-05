@@ -4,6 +4,7 @@
 namespace application\controllers;
 
 use application\models\ModelShow;
+use Route;
 
 class ControllerShow extends Controller
 {
@@ -15,8 +16,12 @@ class ControllerShow extends Controller
     }
 
     function actionPoll(){
-        $data = $this->model->getPollUUID();
-        return $this->view->generate('ViewShow.php', 'ViewTemplate.php', $data); 
+        $currentUuid = $this->model->getPollUUID();
+        if( $data = $this->model->pollExists($currentUuid) ){
+            return $this->view->generate('ViewShow.php', 'ViewTemplate.php', $data); 
+        } else {
+            Route::ErrorPage404();
+        }
     }
 
     
