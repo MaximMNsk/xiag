@@ -1,5 +1,6 @@
 <script src="assets/js/main-form-manage.js"></script>
 <script src="assets/js/main-form-req.js"></script>
+<script src="assets/js/ajax.js"></script>
 <div class="container m-5 p-3 mx-auto border">
     <div class="card">
         <div class="card-header">
