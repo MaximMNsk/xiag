@@ -26,6 +26,7 @@ class ModelMain
     function savePoll( $data=[] ){
         $event['code'] = 0;
         $event['addData'] = '';
+        $answerId = false;
 
         if( !$this->modelValidate->emptyVals($data) ){
             $event['code'] = 201;

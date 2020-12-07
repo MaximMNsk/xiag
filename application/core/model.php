@@ -23,6 +23,7 @@ class Model
             }
         }
         $statement->execute();
+        // print_r($statement->errorInfo());
         if($q[0] == 'select'){
             if($statement->errorCode()=='00000'){
                 $res = $statement->fetchAll(PDO::FETCH_ASSOC);
