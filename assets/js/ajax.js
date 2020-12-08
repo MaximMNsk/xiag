@@ -1,43 +1,83 @@
-$(document).ajaxStart(function () {
-    waiting( 'start' );
-});
+//ajax.js
 
-$(document).ajaxStop(function () {
-    waiting( 'stop' );
-});
+export class Ajax
+{
 
-function waiting( way ) {
-    if( way=='start' ){
-        $("body").prepend("<div id=\"waiting\"><img src='../assets/img/loading-page.gif' id=\"waiting-img\" /></div>");
-        $("#waiting").addClass('position-absolute w-100 h-100').css({"z-index":"500"});
-        $("#waiting-img").css( {"top":"10%", "left":"37%"} ).addClass('position-fixed w-25');
-        // $("body").attr("disabled", true);
-    }else if( way=='stop' ){
-        $("body").attr("disabled", false);
-        $("#waiting").remove();
-    }else{
-        return false;
+    sendReq( url, params ){
+        var d = $.Deferred();
+        $.ajax({
+            dataType: "json",
+            type: "POST",
+            // url: 'main/save/',
+            url: url,
+            data: $.param( /*collectData()*/ params ),
+            success: function( ans ){
+                $.when( customAlert( ans.code, ans.text ) ).done(()=>{
+                    if( ans.code==0 ){
+                        d.resolve();
+                        customRedirect( ans.addData );
+                    }else{
+                        d.resolve();
+                    }
+                });
+            },
+            error: (jqXHR, exception) => {
+                this.ajaxError(jqXHR, exception);
+                d.reject();
+            }
+        });
+        return d; 
     }
-}
-
-
-function ajaxError(jqXHR, exception){
-    var msg = '';
-    if (jqXHR.status === 0) {
-        msg = 'Can not connect.\n Verify Network.';
-    } else if (jqXHR.status == 404) {
-        msg = 'Requested page not found. [404]';
-    } else if (jqXHR.status == 500) {
-        msg = 'Internal Server Error [500].';
-    } else if (exception === 'parsererror') {
-        msg = 'Requested JSON parse failed.';
-    } else if (exception === 'timeout') {
-        msg = 'Time out error.';
-    } else if (exception === 'abort') {
-        msg = 'Ajax request aborted.';
-    } else {
-        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+    
+    waiting( way ) {
+        if( way=='start' ){
+            $("body").prepend("<div id=\"waiting\"><img src='../assets/img/loading-page.gif' id=\"waiting-img\" /></div>");
+            $("#waiting").addClass('position-absolute w-100 h-100').css({"z-index":"500"});
+            $("#waiting-img").css( {"top":"10%", "left":"37%"} ).addClass('position-fixed w-25');
+            // $("body").attr("disabled", true);
+        }else if( way=='stop' ){
+            $("body").attr("disabled", false);
+            $("#waiting").remove();
+        }else{
+            return false;
+        }
     }
-    alert( msg + '<br><br>' + jqXHR.responseText, 3 );
+    
+    
+    ajaxError(jqXHR, exception){
+        var msg = '';
+        if (jqXHR.status === 0) {
+            msg = 'Can not connect.\n Verify Network.';
+        } else if (jqXHR.status == 404) {
+            msg = 'Requested page not found. [404]';
+        } else if (jqXHR.status == 500) {
+            msg = 'Internal Server Error [500].';
+        } else if (exception === 'parsererror') {
+            msg = 'Requested JSON parse failed.';
+        } else if (exception === 'timeout') {
+            msg = 'Time out error.';
+        } else if (exception === 'abort') {
+            msg = 'Ajax request aborted.';
+        } else {
+            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+        }
+        $("body").prepend('<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="dialog">'+
+                            '<div class="modal-dialog modal-lg" role="document">'+
+                                '<div class="modal-content">'+
+                                    '<div class="modal-header">'+
+                                        '<h5 class="modal-title">AJAX ERROR RESP</h5>'+
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                                            '<span aria-hidden="true">&times;</span>'+
+                                        '</button>'+
+                                    '</div>'+
+                                    '<div class="modal-body">'+
+                                        '<p>'+msg+'</p>'+
+                                        '<p>'+jqXHR.responseText+'</p>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>');
+        $( "#dialog" ).modal();
+    
+    }
 
 }

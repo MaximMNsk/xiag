@@ -3,6 +3,10 @@ $(document).ready(()=>{
     if (browserId===undefined)  setCookie('browserId', makeId(16));
 });
 
+function collectData(){
+    
+}
+
 function makeId(length) {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

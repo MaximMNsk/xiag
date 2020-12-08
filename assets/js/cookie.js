@@ -1,3 +1,5 @@
+// cookie.js
+
 function getCookieByName( name ){
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"

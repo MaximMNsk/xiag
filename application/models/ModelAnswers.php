@@ -15,7 +15,7 @@ class ModelAnswers extends Model
     }
 
     function save(){
-        if( !is_array($this->answers) ) return false;
+        if( !is_array($this->answerss) ) return false;
         $sql = 'insert into answers (parent_id, answer) values ';
         foreach($this->answers as $k => $answer){
             $k = str_replace('-', '_', $k);
