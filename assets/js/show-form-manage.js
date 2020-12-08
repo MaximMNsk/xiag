@@ -1,6 +1,12 @@
+import Ajax from './ajax.js';
+import { Cookie } from './cookie.js';
+var ajax = new Ajax();
+var cookie = new Cookie();
+
 $(document).ready(()=>{
-    let browserId = getCookieByName('browserId');
-    if (browserId===undefined)  setCookie('browserId', makeId(16));
+    let browserId = cookie.getCookie('browserId');
+    if (browserId===undefined)  cookie.setCookie('browserId', makeId(16));
+    console.info(document.cookie);
 });
 
 function collectData(){

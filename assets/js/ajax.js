@@ -1,32 +1,30 @@
 //ajax.js
 
-export class Ajax
+export default class Ajax
 {
-
+    answer;
     sendReq( url, params ){
         var d = $.Deferred();
+        let answer = [];
         $.ajax({
             dataType: "json",
             type: "POST",
-            // url: 'main/save/',
             url: url,
-            data: $.param( /*collectData()*/ params ),
-            success: function( ans ){
-                $.when( customAlert( ans.code, ans.text ) ).done(()=>{
-                    if( ans.code==0 ){
-                        d.resolve();
-                        customRedirect( ans.addData );
-                    }else{
-                        d.resolve();
-                    }
-                });
+            data: $.param( params ),
+            success: ( ans )=>{
+                this.saveResp( ans );
+                d.resolve();
             },
             error: (jqXHR, exception) => {
                 this.ajaxError(jqXHR, exception);
-                d.reject();
+                d.resolve();
             }
         });
         return d; 
+    }
+
+    saveResp( resp ){
+        this.answer = resp;
     }
     
     waiting( way ) {

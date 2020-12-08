@@ -1,13 +1,15 @@
 // cookie.js
 
-function getCookieByName( name ){
+export class Cookie
+{
+  getCookie( name ){
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
       ));
       return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-function setCookie( name, value, options = {} ){
+setCookie( name, value, options = {} ){
     options = {
         path: '/',
         ...options
@@ -28,4 +30,6 @@ function setCookie( name, value, options = {} ){
       }
     
       document.cookie = updatedCookie;
+}
+
 }

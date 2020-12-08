@@ -1,33 +1,31 @@
-var ajaxModule;
-
-$(document).ready(()=>{
-    load();
-});
-
-async function load(){
-    ajaxModule = await import('./ajax.js');
-}
-
+import Ajax from './ajax.js';
+var ajax = new Ajax();
 
 
 $(document).on('click', '#save', ()=>{
-
+    let collectedData = collectData();
+    $.when(ajax.sendReq( 'main/save/', collectedData )).done(()=>{
+        $.when( customAlert( ajax.answer.code, ajax.answer.text ) ).done(()=>{
+            if( ajax.answer.code==0 ){
+                customRedirect( ajax.answer.addData );
+            }
+        });
+    });
 });
 
-
-$(document).ajaxStart(function () {
-    ajaxModule.waiting( 'start' );
+$(document).ajaxStart( () => {
+    ajax.waiting('start');
 });
 
-$(document).ajaxStop(function () {
-    ajaxModule.waiting( 'stop' );
+$(document).ajaxStop( () => {
+    ajax.waiting('stop');
 });
 
 $(document).on('click', '#add-item', ()=>{
     addItem();
 });
 
-$(document).on('click', '#kill-item', function(){
+$(document).on('click', '#kill-item', () => {
     var id = $(this).attr('item-id');
     $('span[ans-id='+id+']').remove();
 });

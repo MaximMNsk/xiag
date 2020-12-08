@@ -1,6 +1,4 @@
-<script src="../../assets/js/show-form-manage.js"></script>
-<script src="../../assets/js/ajax.js"></script>
-<script src="../../assets/js/cookie.js"></script>
+<script src="../../assets/js/show-form-manage.js" type="module"></script>
 <link rel="stylesheet" href="../../assets/css/poll-site.css">
 <div class="container m-5 p-3 mx-auto border">
     <div class="card">
