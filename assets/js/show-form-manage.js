@@ -6,6 +6,7 @@ var cookie = new Cookie();
 $(document).ready(()=>{
     let browserId = cookie.getCookie('browserId');
     if (browserId===undefined)  cookie.setCookie('browserId', makeId(16));
+    // cookie.deleteCookie('browserId');
     console.info(document.cookie);
 });
 
