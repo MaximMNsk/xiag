@@ -12,7 +12,21 @@ $(document).ready(()=>{
 
 $(document).on('click', '#vote', ()=>{
     console.info(collectData());
+    let collectedData = collectData();
+    $.when(ajax.sendReq( 'main/save/', collectedData )).done(()=>{
+        customAlert( ajax.answer.code, ajax.answer.text );
+    });
 });
+
+$(document).ajaxStart( () => {
+    ajax.waiting('start');
+});
+
+$(document).ajaxStop( () => {
+    ajax.waiting('stop');
+});
+
+
 
 function collectData(){
     let data = [];
@@ -34,3 +48,18 @@ function makeId(length) {
     }
     return result;
  }
+
+ function customAlert( alertCode, alertText ){
+    var d = $.Deferred();
+    var alertClass = (alertCode==0) ? "alert alert-success" : "alert alert-warning";
+    $("#answers").append("<div id='custom-alert'>"+alertText+"</div>");
+    $("#custom-alert").addClass(alertClass).hide();
+    $("#custom-alert").fadeIn();
+    setTimeout(()=>{
+        $.when( $("#custom-alert").fadeOut() ).done(()=>{
+            $("#custom-alert").remove();
+            d.resolve();
+        });
+    }, 5000);
+    return d; 
+}
