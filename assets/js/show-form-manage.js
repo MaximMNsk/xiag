@@ -31,12 +31,14 @@ $(document).ajaxStop( () => {
 function collectData(){
     let data = [];
     let userName = $('#user-name').val();
-    let answer = $('input[destination="vote"]:checked').attr('id');
+    let answerId = $('input[destination="vote"]:checked').attr('id');
     let browserId = cookie.getCookie('browserId');
+    let pollId = $('input[destination="vote"]:checked').attr('name');
     data.push(
         {name: 'userName', value: userName },
-        {name: 'answer', value: (answer===undefined) ? "" : answer },
+        {name: 'answerId', value: (answerId===undefined) ? "" : answerId },
         {name: 'browserId', value: browserId },
+        {name: 'pollId', value: (pollId===undefined) ? "" : pollId },
     );
     return data;
 }
@@ -53,6 +55,7 @@ function makeId(length) {
 
  function customAlert( alertCode, alertText ){
     var d = $.Deferred();
+    $("#custom-alert").remove();
     var alertClass = (alertCode==0) ? "alert alert-success" : "alert alert-warning";
     $("#answers").append("<div id='custom-alert'>"+alertText+"</div>");
     $("#custom-alert").addClass(alertClass).hide();

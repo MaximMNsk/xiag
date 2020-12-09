@@ -59,6 +59,7 @@ function collectData(){
 
 function customAlert( alertCode, alertText ){
     var d = $.Deferred();
+    $("#custom-alert").remove();
     var alertClass = (alertCode==0) ? "alert alert-success" : "alert alert-warning";
     $("#message").append("<div id='custom-alert'>"+alertText+"</div>");
     $("#custom-alert").addClass(alertClass).hide();

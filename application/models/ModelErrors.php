@@ -19,6 +19,7 @@ class ModelErrors
             101 => 'Poll saving errors',
             102 => 'Poll answers saving errors',
             201 => 'Empty fields detected. All fields required',
+            301 => 'You have already voted',
         ];
     }
 

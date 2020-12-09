@@ -1,1 +1,1 @@
-001_make_base.sql|002_create_table_poll.sql|003_create_table_answers.sql|004_create_uuid_trigger.sql|
+001_make_base.sql|002_create_table_poll.sql|003_create_table_answers.sql|004_create_uuid_trigger.sql|005_create_table_votes.sql|006_create_vote_exists_trigger.sql|

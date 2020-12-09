@@ -14,7 +14,7 @@
                 <div class="w-75 mb-3" id="answers">
                 <?php foreach($data['answers'] as $answer) : ?>
                     <label for="<?= $answer['id'] ?>" class="mx-3">
-                        <input type="radio" destination="vote" name="<?= $data['poll']['uuid'] ?>" id="<?= $answer['id'] ?>"> <span class="font-size-5"><?= $answer['answer'] ?></span> 
+                        <input type="radio" destination="vote" name="<?= $data['poll']['id'] ?>" id="<?= $answer['id'] ?>"> <span class="font-size-5"><?= $answer['answer'] ?></span> 
                     </label>
                 <?php endforeach; ?>
                 </div>
