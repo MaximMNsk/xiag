@@ -1,5 +1,4 @@
-<script src="assets/js/main-form-manage.js"></script>
-<script src="assets/js/main-form-req.js"></script>
+<script src="assets/js/main-form-manage.js" type="module" ></script>
 <div class="container m-5 p-3 mx-auto border">
     <div class="card">
         <div class="card-header">
@@ -22,6 +21,7 @@
             <span class="col-5" id="add-item"><button class="btn btn-success">+</button></span>
             <span></span>
             <hr>
+            <span id="message" class="w-5"></span>
             <button class="btn btn-success" id="save">START</button>
         </div>
     </div>

@@ -14,18 +14,26 @@ class Model
         $this->db = (!$conn) ? false : $conn ;
     }
 
-    function makeRequest($options=[ 'sql'=>'select 1', 'params'=>[] ] ){ // params = ['sql'=>'', 'values'=>['bindName1'=>'bindValue1', ... , 'bindName2'=>'bindValue2']]
+    function makeRequest($options=[ 'sql'=>'select 1', 'params'=>[] ] ){ // options = ['sql'=>'', 'params'=>['bindName1'=>'bindValue1', ... , 'bindName2'=>'bindValue2']]
         $q = explode( ' ', strtolower(trim($options['sql'])) );
         $statement = $this->db->prepare( $options['sql'] );
         if(count( $options['params'] )>0){
-            foreach($options['params'] as $k=>$v){
+            foreach($options['params'] as $k=>&$v){
                 $statement->bindParam( $k, $v );
             }
         }
         $statement->execute();
+        // print_r($statement->errorInfo());
         if($q[0] == 'select'){
             if($statement->errorCode()=='00000'){
-                $res = $statement->fetchAll();
+                $res = $statement->fetchAll(PDO::FETCH_ASSOC);
+                return $res;
+            }else{
+                return false;
+            }
+        }elseif($q[0] == 'insert'){
+            if($statement->errorCode()=='00000'){
+                $res = $this->db->lastInsertId();
                 return $res;
             }else{
                 return false;

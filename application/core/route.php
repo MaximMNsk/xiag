@@ -23,7 +23,7 @@ class Route
         $actionName = 'action'.ucfirst($actionName);
 
 
-        $modelFile = strtolower($modelName).'.php';
+        $modelFile = $modelName.'.php';
         $modelPath = "application/models/".$modelFile;
 
         if(file_exists($modelPath))
@@ -39,7 +39,10 @@ class Route
         {
             include $controllerPath;
         }
-        
+        else
+        {
+            self::ErrorPage404();
+        }
 
         $fullControllerName = 'application\\controllers\\'.$controllerName;
 
@@ -50,14 +53,17 @@ class Route
         {
             $controller->$action();
         }
-        
+        else
+        {
+            self::ErrorPage404();
+        }
        
     }
 
     static function ErrorPage404()
     {
         $routes = explode('/', $_SERVER['REQUEST_URI']);
-        $host = 'http://'.$_SERVER['HTTP_HOST'].'/'.$routes[1].'/';
+        $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
         header('HTTP/1.1 404 Not Found');
         header("Status: 404 Not Found");
         header('Location:'.$host.'404');
