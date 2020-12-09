@@ -13,7 +13,7 @@ $(document).ready(()=>{
 $(document).on('click', '#vote', ()=>{
     console.info(collectData());
     let collectedData = collectData();
-    $.when(ajax.sendReq( 'main/save/', collectedData )).done(()=>{
+    $.when(ajax.sendReq( '../../vote/save/', collectedData )).done(()=>{
         customAlert( ajax.answer.code, ajax.answer.text );
     });
 });
@@ -32,9 +32,11 @@ function collectData(){
     let data = [];
     let userName = $('#user-name').val();
     let answer = $('input[destination="vote"]:checked').attr('id');
+    let browserId = cookie.getCookie('browserId');
     data.push(
         {name: 'userName', value: userName },
-        {name: 'answer', value: (answer===undefined) ? "" : answer }
+        {name: 'answer', value: (answer===undefined) ? "" : answer },
+        {name: 'browserId', value: browserId },
     );
     return data;
 }
