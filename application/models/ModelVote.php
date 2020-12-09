@@ -12,6 +12,7 @@ class ModelVote extends Model
     }
 
     function saveSome(){
+        $sql = '';
         $res = $this->makeRequest(['sql' => 'select * from poll', 'params'=>[]]);
         return $res;
     }

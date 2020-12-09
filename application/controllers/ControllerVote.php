@@ -3,7 +3,7 @@
 
 namespace application\controllers;
 
-use application\models\ModelShow;
+use application\models\ModelVote;
 
 class ControllerVote extends Controller
 {
@@ -11,10 +11,14 @@ class ControllerVote extends Controller
     function __construct()
     {
         parent::__construct();
-        $this->model = new ModelShow;
+        $this->model = new ModelVote;
     }
 
     function actionIndex(){
+
+    }
+
+    function actionSave(){
 
     }
     
