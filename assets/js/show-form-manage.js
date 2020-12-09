@@ -10,8 +10,19 @@ $(document).ready(()=>{
     console.info(document.cookie);
 });
 
+$(document).on('click', '#vote', ()=>{
+    console.info(collectData());
+});
+
 function collectData(){
-    
+    let data = [];
+    let userName = $('#user-name').val();
+    let answer = $('input[destination="vote"]:checked').attr('id');
+    data.push(
+        {name: 'userName', value: userName },
+        {name: 'answer', value: (answer===undefined) ? "" : answer }
+    );
+    return data;
 }
 
 function makeId(length) {

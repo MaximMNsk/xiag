@@ -9,17 +9,17 @@
             <div class="m-2">
                 <div class="mb-3">
                     <label for="" class="font-size-4">Enter name:</label>
-                    <input type="text" name="" id="" class="form-control">
+                    <input type="text" name="user-name" id="user-name" class="form-control">
                 </div>
                 <div class="w-75 mb-3">
                 <?php foreach($data['answers'] as $answer) : ?>
                     <label for="<?= $answer['id'] ?>" class="mx-3">
-                        <input type="radio" name="<?= $data['poll']['uuid'] ?>" id="<?= $answer['id'] ?>"> <span class="font-size-5"><?= $answer['answer'] ?></span> 
+                        <input type="radio" destination="vote" name="<?= $data['poll']['uuid'] ?>" id="<?= $answer['id'] ?>"> <span class="font-size-5"><?= $answer['answer'] ?></span> 
                     </label>
                 <?php endforeach; ?>
                 </div>
             </div>
-            <button class="btn btn-success ml-2 px-5">Vote</button>
+            <button class="btn btn-success ml-2 px-5" id="vote">Vote</button>
             <hr class="my-4">
                 <div class="card w-75 mx-auto">
                     <div class="card-header">
