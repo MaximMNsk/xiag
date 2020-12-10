@@ -7,6 +7,7 @@ require 'ModelValidate.php';
 require 'ModelErrors.php';
 require 'ModelVotes.php';
 
+
 use application\models\ModelPoll;
 use application\models\Model;
 use application\models\ModelValidate;
@@ -34,7 +35,7 @@ class ModelVote extends Model
             $duplicate = $this->modelVotes->duplicate;
     
             if($duplicate && !$id){
-                $event['code'] = 301;
+                $event['code'] = 301; // Duplicate
             }elseif(!$id){
                 $event['code'] = 101;
             }else{
@@ -48,4 +49,15 @@ class ModelVote extends Model
 
         return $event;
     }
+
+    function getData( $data ){
+        return $this->modelVotes->getLastVoteData( $data );
+    }
+
+    function cacheVotes( $data ){
+        $data = json_encode($this->getData( $data ));
+        print $data;
+        return file_put_contents(WSS['CACHE_PATH'].'/votes.cache', $data);
+    }
+
 }

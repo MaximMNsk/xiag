@@ -3,11 +3,11 @@
 use Workerman\Worker;
 
 //require_once 'vendor/autoload.php';
-require_once __DIR__.'../../vendor/autoload.php';
-require __DIR__.'../../config.php';
+require_once __DIR__.'/../../vendor/autoload.php';
+require __DIR__.'/../../config.php';
 
 // Create a Websocket server
-$ws_worker = new Worker('websocket://xiag.test:27800');
+$ws_worker = new Worker('websocket://'.WSS['HOST'].':'.WSS['PORT']);
 // 4 processes
 $ws_worker->count = 4;
 // Emitted when new connection come

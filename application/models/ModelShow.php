@@ -4,10 +4,8 @@ namespace application\models;
 
 require 'ModelPoll.php';
 require 'ModelAnswers.php';
-require_once 'vendor/autoload.php';
 
 
-use Workerman\Worker;
 use application\models\ModelPoll;
 use application\models\ModelAnswers;
 
@@ -18,7 +16,6 @@ class ModelShow
     {
         $this->modelPoll = new ModelPoll;
         $this->modelAnswers = new ModelAnswers;
-        $this->startWebSocketserver();
     }
 
 
@@ -39,11 +36,6 @@ class ModelShow
     function getAnswersData( $id ){
         $this->modelAnswers->parentId = $id;
         return $this->modelAnswers->getData();
-    }
-
-    function startWebSocketserver(){
-        // print_r(
-        // exec('php application/ws/server.php start &'));
     }
 
 }

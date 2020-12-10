@@ -26,6 +26,7 @@
                         <span class="font-size-5 font-weight-bold">Results</span>
                     </div>
                     <div class="card-body">
+                    <input type="hidden" wss-addr="ws://<?= WSS['HOST'].':'.WSS['PORT'] ?>">
                         <pre>
                             <?php print_r( $data ); ?>
                         </pre>

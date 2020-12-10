@@ -20,6 +20,7 @@ class ControllerVote extends Controller
 
     function actionSave(){
         $data = $this->model->save( $_POST );
+        $this->model->cacheVotes( $_POST );
         return $this->view->generate('ViewJSONResp.php', 'ViewEmpty.php', $data); 
     }
     
