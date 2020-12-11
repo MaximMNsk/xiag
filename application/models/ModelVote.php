@@ -55,9 +55,10 @@ class ModelVote extends Model
     }
 
     function cacheVotes( $data ){
-        $data = json_encode($this->getData( $data ));
-        print $data;
-        return file_put_contents(WSS['CACHE_PATH'].'/votes.cache', $data);
+        $data = $this->getData( $data );
+        $pollId = $data[0]['poll_id'];
+        $data = json_encode($data);
+        return file_put_contents(WSS['CACHE_PATH'].'/'.$pollId.'.votes.cache', $data);
     }
 
 }

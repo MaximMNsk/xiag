@@ -1,4 +1,5 @@
 <script src="../../assets/js/show-form-manage.js" type="module"></script>
+<script src="../../assets/js/show-form-votes.js"></script>
 <link rel="stylesheet" href="../../assets/css/poll-site.css">
 <div class="container m-5 p-3 mx-auto border">
     <div class="card">
@@ -26,10 +27,8 @@
                         <span class="font-size-5 font-weight-bold">Results</span>
                     </div>
                     <div class="card-body">
-                    <input type="hidden" wss-addr="ws://<?= WSS['HOST'].':'.WSS['PORT'] ?>">
-                        <pre>
-                            <?php print_r( $data ); ?>
-                        </pre>
+                        <input type="hidden" wss-addr="ws://<?= WSS['HOST'].':'.WSS['PORT'] ?>" poll-id="<?= $data['poll']['id'] ?>" id="add-data">
+                        <div id="vote-data" class="row align-items-center justify-content-center">Waiting...</div>
                     </div>
                 </div>
         </div>
