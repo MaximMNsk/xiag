@@ -15,6 +15,8 @@ use application\models\ModelErrors;
 class ModelMain 
 {
 
+    private $pollId;
+
     function __construct()
     {
         $this->modelPoll = new ModelPoll;
@@ -43,6 +45,7 @@ class ModelMain
             } else {
                 $this->modelAnswers->answers = $answers;
                 $this->modelAnswers->parentId = $this->modelPoll->id;
+                $this->pollId = $this->modelPoll->id;
                 $answerId = $this->modelAnswers->save();
             }
             
@@ -60,5 +63,7 @@ class ModelMain
         return $event;
     }
     
-
+    function makeCache(){
+        return file_put_contents(__DIR__.'/../cache/'.$this->pollId.'.votes.cache', '{}');
+    }
 }

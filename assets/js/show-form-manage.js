@@ -1,17 +1,20 @@
 import Ajax from './ajax.js';
 import { Cookie } from './cookie.js';
+import { WebSocketVote } from './show-form-votes.js';
 var ajax = new Ajax();
 var cookie = new Cookie();
+
 
 $(document).ready(()=>{
     let browserId = cookie.getCookie('browserId');
     if (browserId===undefined)  cookie.setCookie('browserId', makeId(16));
+    WebSocketVote();
     // cookie.deleteCookie('browserId');
-    console.info(document.cookie);
+    // console.info(document.cookie);
 });
 
 $(document).on('click', '#vote', ()=>{
-    console.info(collectData());
+    // console.info(collectData());
     let collectedData = collectData();
     $.when(ajax.sendReq( '../../vote/save/', collectedData )).done(()=>{
         customAlert( ajax.answer.code, ajax.answer.text );

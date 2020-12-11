@@ -21,16 +21,16 @@
             </div>
             <button class="btn btn-success ml-2 px-5" id="vote">Vote</button>
             <hr class="my-4">
-                <div class="card w-75 mx-auto">
+                <div class="card ml-3 mr-3 mx-auto">
                     <div class="card-header">
                         <span class="font-size-5 font-weight-bold">Results</span>
                     </div>
                     <div class="card-body">
-                        <pre>
-                            <?php print_r( $data ); ?>
-                        </pre>
+                        <input type="hidden" wss-addr="ws://<?= WSS['HOST'].':'.WSS['PORT'] ?>" poll-id="<?= $data['poll']['id'] ?>" id="add-data">
+                        <div id="vote-data" class="row align-items-center justify-content-center">Waiting...</div>
                     </div>
                 </div>
         </div>
     </div>
+    <a href="../../" class="btn btn-success my-3">Back to main page</a>
 </div>
