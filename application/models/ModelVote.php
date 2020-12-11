@@ -6,6 +6,7 @@ require 'ModelPoll.php';
 require 'ModelValidate.php';
 require 'ModelErrors.php';
 require 'ModelVotes.php';
+require 'ModelAnswers.php';
 
 
 use application\models\ModelPoll;
@@ -13,6 +14,7 @@ use application\models\Model;
 use application\models\ModelValidate;
 use application\models\ModelErrors;
 use application\models\ModelVotes;
+use application\models\ModelAnswers;
 
 class ModelVote extends Model
 {
@@ -23,6 +25,7 @@ class ModelVote extends Model
         $this->modelValidate = new ModelValidate;
         $this->modelVotes = new ModelVotes;
         $this->modelErrors = new ModelErrors;
+        $this->modelAnswers = new ModelAnswers;
     }
 
     function save( $data ){
@@ -55,8 +58,14 @@ class ModelVote extends Model
     }
 
     function cacheVotes( $data ){
-        $data = $this->getData( $data );
-        $pollId = $data[0]['poll_id'];
+        $votes = $this->getData( $data );
+        $pollId = $votes[0]['poll_id'];
+        $this->modelAnswers->parentId = $pollId;
+        $poll = $this->modelAnswers->getData();
+        $data = [
+            'poll' => $poll,
+            'votes' => $votes,
+        ];
         $data = json_encode($data);
         return file_put_contents(WSS['CACHE_PATH'].'/'.$pollId.'.votes.cache', $data);
     }

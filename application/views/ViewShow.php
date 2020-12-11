@@ -1,5 +1,4 @@
 <script src="../../assets/js/show-form-manage.js" type="module"></script>
-<script src="../../assets/js/show-form-votes.js"></script>
 <link rel="stylesheet" href="../../assets/css/poll-site.css">
 <div class="container m-5 p-3 mx-auto border">
     <div class="card">
@@ -22,7 +21,7 @@
             </div>
             <button class="btn btn-success ml-2 px-5" id="vote">Vote</button>
             <hr class="my-4">
-                <div class="card w-75 mx-auto">
+                <div class="card ml-3 mr-3 mx-auto">
                     <div class="card-header">
                         <span class="font-size-5 font-weight-bold">Results</span>
                     </div>
@@ -33,4 +32,5 @@
                 </div>
         </div>
     </div>
+    <a href="../../" class="btn btn-success my-3">Back to main page</a>
 </div>

@@ -19,6 +19,7 @@ class ControllerMain extends Controller
 
     function actionSave(){
         $data = $this->model->savePoll($_POST);
+        $this->model->makeCache();
         return $this->view->generate('ViewJSONResp.php', 'ViewEmpty.php', $data); 
     }
 

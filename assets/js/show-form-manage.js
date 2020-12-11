@@ -1,11 +1,14 @@
 import Ajax from './ajax.js';
 import { Cookie } from './cookie.js';
+import { WebSocketVote } from './show-form-votes.js';
 var ajax = new Ajax();
 var cookie = new Cookie();
+
 
 $(document).ready(()=>{
     let browserId = cookie.getCookie('browserId');
     if (browserId===undefined)  cookie.setCookie('browserId', makeId(16));
+    WebSocketVote();
     // cookie.deleteCookie('browserId');
     // console.info(document.cookie);
 });

@@ -16,8 +16,10 @@ $ws_worker->onConnect = function ($connection) {
 };
 // Emitted when data received
 $ws_worker->onMessage = function ($connection, $data) {
-    // Send hello $data
-    $connection->send('Hello ' . $data);
+    // Send cached data
+    $data = json_decode($data);
+    $toSend = getCachedData( $data->pollId );
+    $connection->send($toSend);
 };
 // Emitted when connection closed
 $ws_worker->onClose = function ($connection) {
@@ -26,3 +28,6 @@ $ws_worker->onClose = function ($connection) {
 // Run worker
 Worker::runAll();
 
+function getCachedData(int $id){
+    return file_get_contents(__DIR__.'/../../application/cache/'.$id.'.votes.cache');
+}
