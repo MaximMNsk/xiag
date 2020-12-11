@@ -4,8 +4,5 @@
         <testsuite name="MainForm">
             <directory suffix="Test.php">./tests/MainForm</directory>
         </testsuite>
-        <testsuite name="Migrations">
-            <directory suffix="Test.php">./tests/Migrations</directory>
-        </testsuite>
     </testsuites>
 </phpunit>
