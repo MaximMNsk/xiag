@@ -5,6 +5,7 @@
 * MariaDB 10+
 * WebServer
 * Composer
+* Modern browsers
 
 ## How to install
 1. Copy application to your virtual host. Application must be avalible at `http://your.host`.
