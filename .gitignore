@@ -8,3 +8,6 @@
 
 # application cache
 /application/cache
+
+#local settings
+/config.php
