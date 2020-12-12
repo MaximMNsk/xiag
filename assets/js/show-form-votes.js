@@ -3,7 +3,7 @@ export function WebSocketVote(){
   var log = false;
   let addr = $("#add-data").attr("wss-addr");
   if(addr!==undefined){
-    var socket = new WebSocket("ws://"+addr);
+    var socket = new WebSocket(addr);
   }else{
     return false;
   }
